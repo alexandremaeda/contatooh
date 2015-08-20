@@ -4,6 +4,9 @@ function ContatosController($scope, $resource){
 	$scope.total = 0;
 	$scope.busca = '';
 	$scope.contatos = [];
+	$scope.erro = {
+		mensagem: null
+	};
 
 	var rsContato = $resource('/contatos/:id')
 
@@ -12,18 +15,20 @@ function ContatosController($scope, $resource){
 			function(data){
 				$scope.contatos = data;
 			},
-			function(error){
-				console.log(error);
+			function(erro){
+				console.log(erro);
+				$scope.erro.mensagem = 'Não possível obter os Contatos.';
 			}
 		);
 	}
 
-	$scope.excluir = function(id){
+	$scope.excluir = function(contato){
 		rsContato.delete({
-			id: id
+			id: contato._id
 		}, buscaContatos
-		, function(error){
-			console.log(error);
+		, function(erro){
+			console.log(erro);
+			$scope.erro.mensagem = 'Não possível excluir ' + contato.nome + '.';
 		});
 	};
 

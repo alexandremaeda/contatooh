@@ -3,11 +3,22 @@
 		Contatooh
 	</h1>
 </div>
+<div ng-show="erro.mensagem">
+	{{erro.mensagem}}
+</div>
 <div>
-	<button class="btn btn-primary" ng-click="incrementa()">
-		Novo
-	</button>
-	<p>Contatos cadastrados: {{contatos.length}}</p>
+	<a class="btn btn-primary" ng-href="#/contato">
+		Novo Contato
+	</a>
+	
+	<p ng-hide="contatos.length">
+		Não há Contatos cadastrados.
+	</p>
+	
+	<p ng-show="contatos.length">
+		Contatos cadastrados: {{contatos.length}}
+	</p>
+	
 	<input type="search" placeholder="Busca" ng-model="busca">
 	{{busca}}
 	<div class="table-responsive">
@@ -19,11 +30,11 @@
 			</tr>
 			<tr ng-repeat="contato in contatos | filter: busca"> 
 				<td>
-					<a>{{contato.nome}}</a>
+					<a ng-href="#/contato/{{contato._id}}">{{contato.nome}}</a>
 				</td>
 				<td>{{contato.email}}</td>
 				<td class="text-center">
-					<button class="btn btn-warning" ng-click="excluir(contato._id)">
+					<button class="btn btn-warning" ng-click="excluir(contato)">
 						Remover
 					</button>
 				</td>
