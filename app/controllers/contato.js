@@ -57,7 +57,19 @@ module.exports = function(app) {
 		);
 	};
 
-	controller.excluir = function(req, res) {};
+	controller.excluir = function(req, res) {
+		var _id = req.params.id;
+
+		Contato.remove({'_id': _id}).exec()
+			.then(
+				function() {
+					res.status(204).end();
+				},
+				function(error) {
+					getError(res, error, 500);
+				}
+		);
+	};
 
 	function getError(res, error, status) {
 		console.error(error);
