@@ -15,6 +15,10 @@ function ContatoController($scope, $routeParams, ContatoService) {
 			});
 	};
 
+	ContatoService.query(function(contatos){
+		$scope.contatos = contatos;
+	});
+
 	function buscaContato() {
 
 		var id = $routeParams.id;

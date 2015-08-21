@@ -3,8 +3,14 @@ var app = angular.module('contatooh', [
 	'ngResource'
 ]);
 
-app.config(function($routeProvider){
+app.config(function($routeProvider, $httpProvider){
+	$httpProvider.interceptors.push('InterceptorService');
+
 	$routeProvider
+	.when('/auth', {
+		templateUrl: 'partials/auth.html',
+		controller: 'ContatosController'
+	})
 	.when('/contatos', {
 		templateUrl: 'partials/contatos.html',
 		controller: 'ContatosController'
