@@ -1,56 +1,84 @@
-var contatos = [
-	{
-		_id: 1,
-		nome: 'Contato 01',
-		email: 'contato01@email.com'
-	},
-	{
-		_id: 2,
-		nome: 'Contato 02',
-		email: 'contato02@email.com'
-	},
-	{
-		_id: 3,
-		nome: 'Contato 03',
-		email: 'contato03@email.com'
-	},
-	{
-		_id: 4,
-		nome: 'Contato 04',
-		email: 'contato04@email.com'
-	},
-	{
-		_id: 5,
-		nome: 'Contato 05',
-		email: 'contato05@email.com'
-	}
-];
-
-module.exports = function(){
+module.exports = function(app) {
+	var Contato = app.models.contato;
 	var controller = {};
-	
-	controller.lista = function(req, res){
-		res.json(contatos);
+
+	controller.listar = function(req, res) {
+		Contato.find().exec()
+			.then(
+				function(contatos) {
+					res.json(contatos);
+				},
+				function(error) {
+					getError(res, error, 500);
+				}
+		);
 	};
 
-	controller.porId = function(req, res){
-		var id = req.params.id;
-		var contato = contatos.filter(function(contato){
-			return contato._id == id;
-		})[0];
-		contato 
-			? res.json(contato)
-			: res.status(404).send('Contato não encontrado.');
+	controller.salvar = function(req, res) {
+		var _id = req.body._id;
+
+		if (_id) {
+			Contato.findByIdAndUpdate(_id, req.body).exec()
+				.then(
+					function(contato) {
+						res.json(contato);
+					},
+					function(error) {
+						getError(res, error, 500);
+					}
+			);
+		} else {
+			Contato.create(req.body)
+				.then(
+					function(contato) {
+						res.status(201).json(contato);
+					},
+					function(error) {
+						getError(res, error, 500);
+					}
+			);
+		}
 	};
 
-	controller.excluir = function(req, res){
-		var id = req.params.id;
-		contatos = contatos.filter(function(contato){
-			return contato._id != id;
-		});
+	controller.buscarPorId = function(req, res) {
+		var _id = req.params.id;
 
-		res.status(204).end();
+		Contato.findById(_id).exec()
+			.then(
+				function(contato) {
+					if (!contato)
+						throw new Error("Contato não encontrado.");
+
+					res.json(contato);
+				},
+				function(error) {
+					getError(res, error, 404);
+				}
+		);
 	};
+
+	controller.excluir = function(req, res) {};
+
+	function getError(res, error, status) {
+		console.error(error);
+		res.status(status).json(error);
+	}
+
+	function atualizar(contatoAlterado) {
+		contatos = contatos.map(function(contato) {
+			if (contato._id == contatoAlterado._id)
+				contato = contatoAlterado;
+			return contato;
+		})
+
+		return contatoAlterado;
+	}
+
+	function adicionar(contatoNovo) {
+		contatoNovo._id = ID_CONTATO_INC++;
+		contatos.push(contatoNovo);
+		return contatoNovo;
+	}
 
 	return controller;
 };

@@ -2,9 +2,10 @@ module.exports = function(app){
 	var controller = app.controllers.contato;
 	
 	app.route('/contatos')
-		.get(controller.lista);
+		.get(controller.listar)
+		.post(controller.salvar);
 	
 	app.route('/contatos/:id')
-		.get(controller.porId)
+		.get(controller.buscarPorId)
 		.delete(controller.excluir);
 };

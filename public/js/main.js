@@ -16,9 +16,3 @@ app.config(function($routeProvider){
 		controller: 'ContatoController'
 	}).otherwise('/contatos');
 });
-
-for (var i = params.length - 1; i >= 0; i--) {
-	var route = '/a/b/:id';
-
-	route.indexOf(params[i]) 
-};
