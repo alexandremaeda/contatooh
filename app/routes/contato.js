@@ -1,5 +1,5 @@
 function verificaAutenticacao(req, res, next){
-	console.log('entrou');
+	console.log('Verificando autenticação....');
 	if (req.isAuthenticated())
 		return next();
 	else
