@@ -7,6 +7,10 @@ app.config(function($routeProvider, $httpProvider){
 	$httpProvider.interceptors.push('InterceptorService');
 
 	$routeProvider
+	.when('/', {
+		templateUrl: 'partials/contatos.html',
+		controller: 'ContatosController'
+	})
 	.when('/auth', {
 		templateUrl: 'partials/auth.html',
 		controller: 'ContatosController'
@@ -20,5 +24,5 @@ app.config(function($routeProvider, $httpProvider){
 	}).when('/contato/:id', {
 		templateUrl: 'partials/contato.html',
 		controller: 'ContatoController'
-	}).otherwise('/contatos');
+	});
 });
