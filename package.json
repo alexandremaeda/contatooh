@@ -4,12 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
   },
   "author": "alexandremaeda",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.6.7",
+    "bower": "^1.5.0",
     "cookie-parser": "^1.3.5",
     "ejs": "^0.8.8",
     "express": "^4.8.8",
