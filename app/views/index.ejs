@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="contatooh">
-<head>
+<head ng-controller="HomeController as ctlrHome">
 	<meta charset="utf-8">
 	<title>Contatooh</title>
+
+	<meta property="og:url" content="{{ctlrHome.url}}">
+	<meta property="og:title" content="{{ctlrHome.title}}">
+	<meta property="og:description" content="{{ctlrHome.description}}">
+	<meta property="og:image" content="{{ctlrHome.image}}">
+	<meta property="og:image:type" content="{{ctlrHome.imageType}}">
+	<meta property="og:image:width" content="{{ctlrHome.imageWidth}}"> 
+	<meta property="og:image:height" content="{{ctlrHome.imageHeight}}"> 
+
+	<meta name="fragment" content="!">
 	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.css">
 </head>
@@ -24,6 +34,7 @@
 <script src="vendor/angular-route/angular-route.js"></script>
 <script src="vendor/angular-resource/angular-resource.js"></script>
 <script src="js/main.js"></script>
+<script src="js/controllers/homeController.js"></script>
 <script src="js/controllers/contatosController.js"></script>
 <script src="js/controllers/contatoController.js"></script>
 <script src="js/services/interceptorService.js"></script>

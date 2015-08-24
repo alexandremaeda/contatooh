@@ -10,10 +10,10 @@ module.exports = function(app){
 	var controller = app.controllers.contato;
 
 	app.route('/contatos')
-		.get(verificaAutenticacao, controller.listar)
-		.post(verificaAutenticacao, controller.salvar);
+		.get(controller.listar)
+		.post(controller.salvar);
 	
 	app.route('/contatos/:id')
-		.get(verificaAutenticacao, controller.buscarPorId)
-		.delete(verificaAutenticacao, controller.excluir);
+		.get(controller.buscarPorId)
+		.delete(controller.excluir);
 };

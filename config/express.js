@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var helmet = require('helmet');
-
+var seo = require('mean-seo');
 
 module.exports = function() {
     var app = express();
@@ -33,6 +33,12 @@ module.exports = function() {
     app.use(helmet.xssFilter());
     app.use(helmet.nosniff());
     app.disable('x-powered-by');
+
+    app.use(seo({
+        cacheClient: 'disk', // Can be 'disk' or 'redis'
+        // redisURL: 'redis://:password@hostname:port', // If using redis, optionally specify server credentials
+        cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
+    }));
 
     load('models', {cwd: 'app'})
         .then('controllers')
