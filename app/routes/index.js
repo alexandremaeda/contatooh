@@ -4,6 +4,6 @@ module.exports = function(app) {
     	if(req.user)
     		login = req.user.login;
 
-    	res.render('index', {'usuarioAutenticado': login});
+    	res.render('index');
     })
 };

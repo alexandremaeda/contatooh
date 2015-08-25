@@ -7,6 +7,7 @@ app.config(function($routeProvider, $httpProvider, $locationProvider){
 	$httpProvider.interceptors.push('InterceptorService');
 
 	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
 
 	$routeProvider
 	.when('/', {
@@ -26,5 +27,5 @@ app.config(function($routeProvider, $httpProvider, $locationProvider){
 	}).when('/contato/:id', {
 		templateUrl: 'partials/contato.html',
 		controller: 'ContatoController'
-	});
+	}).otherwise({ redirectTo: '/' });
 });
