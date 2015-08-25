@@ -10,8 +10,10 @@ var seo = require('mean-seo');
 module.exports = function() {
     var app = express();
 
+    app.use(require('prerender-node').set('prerenderToken', 'iSlhTHOp4QkEbhEee6Cw'));
+
     app.use(express.static('./public'));
-    app.set('port', 3000);
+    app.set('port', 3001);
     app.set('view engine', 'ejs');
     app.set('views', './app/views');
     app.use(bodyParser.urlencoded({

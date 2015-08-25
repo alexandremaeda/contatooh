@@ -3,8 +3,10 @@ var app = angular.module('contatooh', [
 	'ngResource'
 ]);
 
-app.config(function($routeProvider, $httpProvider){
+app.config(function($routeProvider, $httpProvider, $locationProvider){
 	$httpProvider.interceptors.push('InterceptorService');
+
+	$locationProvider.html5Mode(true);
 
 	$routeProvider
 	.when('/', {
